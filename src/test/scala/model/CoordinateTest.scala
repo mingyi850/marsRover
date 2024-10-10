@@ -1,12 +1,8 @@
 package model
 
-import exception.MarsRoverException.CommandValidationError
-import model.Command.{MoveForward, RotateLeft, RotateRight}
 import model.Orientation.{East, North, South, West}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-
-import scala.util.{Failure, Success}
 
 class CoordinateTest extends AnyWordSpec with Matchers {
 
@@ -21,9 +17,10 @@ class CoordinateTest extends AnyWordSpec with Matchers {
     "Return some coordinate if coordinate is on grid" in {
       val grid1 = Grid(1, 1)
       Coordinate(0, 0).validateOnGrid(grid1).shouldEqual(Some(Coordinate(0, 0)))
-      Coordinate(1,0).validateOnGrid(grid1).shouldEqual(None)
-      Coordinate(1,1).validateOnGrid(grid1).shouldEqual(None)
-      Coordinate(0,1).validateOnGrid(grid1).shouldEqual(None)
+      Coordinate(1,0).validateOnGrid(grid1).shouldEqual(Some(Coordinate(1, 0)))
+      Coordinate(1,1).validateOnGrid(grid1).shouldEqual(Some(Coordinate(1, 1)))
+      Coordinate(0,1).validateOnGrid(grid1).shouldEqual(Some(Coordinate(0, 1)))
+      Coordinate(2,0).validateOnGrid(grid1).shouldEqual(None)
 
       val grid2 = Grid(3, 10)
       Coordinate(2, 9).validateOnGrid(grid2).shouldEqual(Some(Coordinate(2, 9)))

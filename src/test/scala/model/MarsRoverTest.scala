@@ -39,9 +39,9 @@ class MarsRoverTest extends AnyWordSpec with Matchers {
       ActiveMarsRover(position, South).execute(MoveForward).shouldEqual(ActiveMarsRover(Coordinate(2, 2), South))
     }
     "Become LostMarsRover if leaving grid boundaries" in {
-      implicit val grid: Grid = Grid(10, 10)
-      ActiveMarsRover(Coordinate(9, 9), North).execute(MoveForward).shouldEqual(LostMarsRover(Coordinate(9, 10), North))
-      ActiveMarsRover(Coordinate(0, 1), West).execute(MoveForward).shouldEqual(LostMarsRover(Coordinate(-1, 1), West))
+      implicit val grid: Grid = Grid(9, 9)
+      ActiveMarsRover(Coordinate(9, 9), North).execute(MoveForward).shouldEqual(LostMarsRover(Coordinate(9, 9), North))
+      ActiveMarsRover(Coordinate(0, 1), West).execute(MoveForward).shouldEqual(LostMarsRover(Coordinate(0, 1), West))
     }
   }
 

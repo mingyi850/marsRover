@@ -11,7 +11,7 @@ case class Coordinate(x: Int, y: Int) {
   }
 
   def validateOnGrid(grid: Grid): Option[Coordinate] = {
-    if (x >= 0 && x < grid.width && y >= 0 && y < grid.height) {
+    if (x >= 0 && x <= grid.width && y >= 0 && y <= grid.height) {
       Some(Coordinate(x, y))
     } else None
   }
