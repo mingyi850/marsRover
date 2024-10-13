@@ -21,9 +21,15 @@ class OrientationTest extends AnyWordSpec with Matchers {
       }
 
       "Parse any invalid strings into Failures with Validation Exceptions" in {
-        Orientation.fromString("P").shouldEqual(Failure(OrientationValidationError("P")))
-        Orientation.fromString("a").shouldEqual(Failure(OrientationValidationError("a")))
-        Orientation.fromString("1").shouldEqual(Failure(OrientationValidationError("1")))
+        Orientation
+          .fromString("P")
+          .shouldEqual(Failure(OrientationValidationError("P")))
+        Orientation
+          .fromString("a")
+          .shouldEqual(Failure(OrientationValidationError("a")))
+        Orientation
+          .fromString("1")
+          .shouldEqual(Failure(OrientationValidationError("1")))
       }
     }
 

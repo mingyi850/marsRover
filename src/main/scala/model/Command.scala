@@ -15,14 +15,12 @@ object Command {
     case "L" => Success(RotateLeft)
     case "R" => Success(RotateRight)
     case "F" => Success(MoveForward)
-    case _ => Failure(CommandValidationError(str))
+    case _   => Failure(CommandValidationError(str))
   }
 
   def toString(command: Command): String = command match {
-    case RotateLeft => "L"
+    case RotateLeft  => "L"
     case RotateRight => "R"
     case MoveForward => "F"
   }
 }
-
-

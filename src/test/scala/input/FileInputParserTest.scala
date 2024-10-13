@@ -17,8 +17,22 @@ class FileInputParserTest extends AnyWordSpec with Matchers {
         val path = getClass.getResource("/validInstructions.txt").getPath
         val inputParser = new FileInputParser(path)
         val expected = List(
-          RoverMission(ActiveMarsRover(Coordinate(2, 3), East)(Grid(4, 8)), List(RotateLeft, MoveForward, RotateRight, MoveForward, MoveForward)),
-          RoverMission(ActiveMarsRover(Coordinate(0, 2), North)(Grid(4, 8)), List(MoveForward, MoveForward, RotateLeft, MoveForward, RotateRight, MoveForward, MoveForward))
+          RoverMission(
+            ActiveMarsRover(Coordinate(2, 3), East)(Grid(4, 8)),
+            List(RotateLeft, MoveForward, RotateRight, MoveForward, MoveForward)
+          ),
+          RoverMission(
+            ActiveMarsRover(Coordinate(0, 2), North)(Grid(4, 8)),
+            List(
+              MoveForward,
+              MoveForward,
+              RotateLeft,
+              MoveForward,
+              RotateRight,
+              MoveForward,
+              MoveForward
+            )
+          )
         )
         inputParser.parse() shouldEqual Success(expected)
       }

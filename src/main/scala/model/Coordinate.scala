@@ -6,8 +6,8 @@ case class Coordinate(x: Int, y: Int) {
   def forward(orientation: Orientation): Coordinate = orientation match {
     case North => Coordinate(x, y + 1)
     case South => Coordinate(x, y - 1)
-    case East => Coordinate(x + 1, y)
-    case West => Coordinate(x - 1, y)
+    case East  => Coordinate(x + 1, y)
+    case West  => Coordinate(x - 1, y)
   }
 
   def validateOnGrid(grid: Grid): Option[Coordinate] = {

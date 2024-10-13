@@ -19,9 +19,15 @@ class CommandTest extends AnyWordSpec with Matchers {
       }
 
       "Parse any invalid strings into Failures with Validation Exceptions" in {
-        Command.fromString("A").shouldEqual(Failure(CommandValidationError("A")))
-        Command.fromString("LR").shouldEqual(Failure(CommandValidationError("LR")))
-        Command.fromString("1").shouldEqual(Failure(CommandValidationError("1")))
+        Command
+          .fromString("A")
+          .shouldEqual(Failure(CommandValidationError("A")))
+        Command
+          .fromString("LR")
+          .shouldEqual(Failure(CommandValidationError("LR")))
+        Command
+          .fromString("1")
+          .shouldEqual(Failure(CommandValidationError("1")))
       }
     }
 

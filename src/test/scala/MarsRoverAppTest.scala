@@ -33,7 +33,8 @@ class MarsRoverAppTest extends AnyWordSpec with Matchers {
           "(4, 4, E)",
           "(0, 4, W) LOST"
         )
-        val terminalInput = getClass.getResourceAsStream("/validInstructions.txt")
+        val terminalInput =
+          getClass.getResourceAsStream("/validInstructions.txt")
         Console.withIn(terminalInput) {
           app.run() shouldEqual Success(expected)
         }
@@ -41,7 +42,8 @@ class MarsRoverAppTest extends AnyWordSpec with Matchers {
 
       "Read instructions from terminal and return failure on broken input" in {
         val app = new MarsRoverApp(None)
-        val terminalInput = getClass.getResourceAsStream("/invalidInstructions.txt")
+        val terminalInput =
+          getClass.getResourceAsStream("/invalidInstructions.txt")
         Console.withIn(terminalInput) {
           app.run().isFailure shouldBe true
         }

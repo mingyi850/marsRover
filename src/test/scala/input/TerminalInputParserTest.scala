@@ -14,19 +14,41 @@ class TerminalInputParserTest extends AnyWordSpec with Matchers {
 
     "parse" should {
       "Read instructions from terminal correctly" in {
-        val terminalInput = getClass.getResourceAsStream("/validInstructions.txt")
+        val terminalInput =
+          getClass.getResourceAsStream("/validInstructions.txt")
         val inputParser = new TerminalInputParser
         Console.withIn(terminalInput) {
           val expected = List(
-            RoverMission(ActiveMarsRover(Coordinate(2, 3), East)(Grid(4, 8)), List(RotateLeft, MoveForward, RotateRight, MoveForward, MoveForward)),
-            RoverMission(ActiveMarsRover(Coordinate(0, 2), North)(Grid(4, 8)), List(MoveForward, MoveForward, RotateLeft, MoveForward, RotateRight, MoveForward, MoveForward))
+            RoverMission(
+              ActiveMarsRover(Coordinate(2, 3), East)(Grid(4, 8)),
+              List(
+                RotateLeft,
+                MoveForward,
+                RotateRight,
+                MoveForward,
+                MoveForward
+              )
+            ),
+            RoverMission(
+              ActiveMarsRover(Coordinate(0, 2), North)(Grid(4, 8)),
+              List(
+                MoveForward,
+                MoveForward,
+                RotateLeft,
+                MoveForward,
+                RotateRight,
+                MoveForward,
+                MoveForward
+              )
+            )
           )
           inputParser.parse() shouldEqual Success(expected)
         }
       }
 
       "Return Failure with MissionValidationError if input has invalid format" in {
-        val terminalInput = getClass.getResourceAsStream("/invalidInstructions.txt")
+        val terminalInput =
+          getClass.getResourceAsStream("/invalidInstructions.txt")
         val inputParser = new TerminalInputParser
         Console.withIn(terminalInput) {
           inputParser.parse().isFailure shouldBe true

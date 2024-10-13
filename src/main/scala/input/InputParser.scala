@@ -1,10 +1,13 @@
 package input
 
-import exception.MarsRoverException.{GridValidationError, InputStructureValidationError, MissionValidationError}
+import exception.MarsRoverException.{
+  GridValidationError,
+  InputStructureValidationError,
+  MissionValidationError
+}
 import model._
 
 import scala.util.{Failure, Success, Try}
-
 
 abstract class InputParser {
 
@@ -12,7 +15,7 @@ abstract class InputParser {
 
   def parseLines(lines: List[String]): Try[(String, List[String])] = {
     lines match {
-      case Nil => Failure(InputStructureValidationError())
+      case Nil          => Failure(InputStructureValidationError())
       case head :: tail => Success((head, tail))
     }
   }
@@ -23,14 +26,27 @@ abstract class InputParser {
       case Some(Seq(width, height)) => {
         (width.toIntOption, height.toIntOption) match {
           case (Some(w), Some(h)) => Grid.create(w, h)
-          case _ => Failure(GridValidationError(f"Invalid input: $width $height. Grid dimensions should be integers"))
+          case _ =>
+            Failure(
+              GridValidationError(
+                f"Invalid input: $width $height. Grid dimensions should be integers"
+              )
+            )
         }
       }
-      case _ => Failure(GridValidationError(f"Invalid input: $str. Grid dimensions should be integers"))
+      case _ =>
+        Failure(
+          GridValidationError(
+            f"Invalid input: $str. Grid dimensions should be integers"
+          )
+        )
     }
   }
 
-  def parseMissions(lines: List[String], grid: Grid): Try[List[RoverMission]] = {
+  def parseMissions(
+      lines: List[String],
+      grid: Grid
+  ): Try[List[RoverMission]] = {
     toTryList(lines.map(parseMissionString(_, grid)))
   }
 
@@ -53,15 +69,14 @@ abstract class InputParser {
   private def parseCoordinate(x: String, y: String): Try[Coordinate] = {
     (x.toIntOption, y.toIntOption) match {
       case (Some(x), Some(y)) => Success(Coordinate(x, y))
-      case _ => Failure(MissionValidationError(s"($x, $y)"))
+      case _                  => Failure(MissionValidationError(s"($x, $y)"))
     }
   }
 
   private def parseCommandList(str: String): Try[List[Command]] = {
     toTryList(
-      str
-      .toList
-      .map{ x => Command.fromString(x.toString) }
+      str.toList
+        .map { x => Command.fromString(x.toString) }
     )
 
   }
@@ -69,8 +84,8 @@ abstract class InputParser {
   private def toTryList[A](list: List[Try[A]]): Try[List[A]] = {
     list.foldRight(Try(List.empty[A])) {
       case (Success(x), Success(xs)) => Success(x :: xs)
-      case (Failure(e), _) => Failure(e)
-      case (_, Failure(e)) => Failure(e)
+      case (Failure(e), _)           => Failure(e)
+      case (_, Failure(e))           => Failure(e)
     }
   }
 
@@ -79,6 +94,6 @@ abstract class InputParser {
 object InputParser {
   def apply(filePath: Option[String]): InputParser = filePath match {
     case Some(path) => new FileInputParser(path)
-    case None => new TerminalInputParser()
+    case None       => new TerminalInputParser()
   }
 }

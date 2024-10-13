@@ -17,27 +17,27 @@ object Orientation {
     case "S" => Success(South)
     case "E" => Success(East)
     case "W" => Success(West)
-    case _ => Failure(OrientationValidationError(str))
+    case _   => Failure(OrientationValidationError(str))
   }
 
   def rotateRight(original: Orientation): Orientation = original match {
     case North => East
-    case East => South
+    case East  => South
     case South => West
-    case West => North
+    case West  => North
   }
 
   def rotateLeft(original: Orientation): Orientation = original match {
     case North => West
-    case West => South
+    case West  => South
     case South => East
-    case East => North
+    case East  => North
   }
 
   def toString(orientation: Orientation): String = orientation match {
     case North => "N"
     case South => "S"
-    case East => "E"
-    case West => "W"
+    case East  => "E"
+    case West  => "W"
   }
 }
