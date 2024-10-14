@@ -31,8 +31,7 @@ case class ActiveMarsRover(position: Coordinate, orientation: Orientation)(
 
 case class LostMarsRover(position: Coordinate, orientation: Orientation)
     extends MarsRover(position, orientation) {
-  def execute(command: Command): MarsRover =
-    LostMarsRover(position, orientation)
+  def execute(command: Command): MarsRover = this
 
   def toStateString(): String =
     s"(${position.x}, ${position.y}, ${Orientation.toString(orientation)}) LOST"

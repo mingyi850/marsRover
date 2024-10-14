@@ -13,7 +13,7 @@ class TerminalInputParser extends InputParser {
   }
 
   private def parseGridFromTerminal(): Try[Grid] = {
-    println("Enter the grid size as x y coordinates: format x y")
+    println("Enter the grid size as x y coordinates: format: x y")
     val input = scala.io.StdIn.readLine()
     parseGrid(input)
   }
@@ -23,7 +23,7 @@ class TerminalInputParser extends InputParser {
       grid: Grid
   ): Try[List[RoverMission]] = {
     println(
-      "Enter the next mission or hit enter to finish: format: (x y direction) instructions"
+      "Enter the next mission or hit enter to finish: format: (x, y, direction) instructions"
     )
     val input = scala.io.StdIn.readLine()
     if (input == "") {

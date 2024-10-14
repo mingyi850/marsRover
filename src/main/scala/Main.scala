@@ -9,7 +9,10 @@ object Main {
     val app = new MarsRoverApp(filePath)
     app.run() match {
       case Success(results) => results.foreach(println)
-      case Failure(e)       => throw e
+      case Failure(e)       => {
+        print(e.getMessage)
+        System.exit(1)
+      }
     }
   }
 }

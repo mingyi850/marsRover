@@ -1,8 +1,6 @@
 package model
 
-import exception.MarsRoverException.OrientationValidationError
 import model.Command.{MoveForward, RotateLeft, RotateRight}
-import model.Orientation.{East, North, South, West}
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.{times, verify, when}
 import org.scalatest.matchers.should.Matchers
