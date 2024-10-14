@@ -39,6 +39,7 @@ The entrypoint to the application is `MarsRoverApp`.
 ## What I would add next
 - E2e tests to test entire application and different/more complicated scenarios - a bash script should suffice for a simple file/console based application.
 - Code coverage tools
+- CI pipeline using Github actions to run tests and linting on every push
 - More user-friendly input - currently input parsing is very strict and likely to be error prone even on additional whitespaces. There could also be a retry loop where the user is prompted to re-enter the input if it is invalid instead of just exiting the program. 
 - Use of devcontainers/docker for development environment - Java/Scala can admittedly be finicky to set up on different machines, so ideally we would provide the JDK and Scala environment in a container.
 - Support for multithreading for large files in parallel. The current implementation works well enough, but multithreading via the use of parallel collections or futures could be used to speed up processing at scale.
